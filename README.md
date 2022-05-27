@@ -158,7 +158,7 @@ I have played with most of the APIs under `/api/v3` before and tested them, I ne
 
 `assetfinder -subs-only vuln.com > all.txt`
 
-![](./images/enum.txt)
+![](enum.png)
 
 2. Filter alive targets
 
@@ -168,19 +168,19 @@ I have played with most of the APIs under `/api/v3` before and tested them, I ne
 
 `cat live.txt | subjs > jsfiles.txt`
 
-![](./images/enum2)
+![](enum2.png)
 
 4. Extract all endpoints from those files using `LinkFinder` with one-liner.
 
 `for i in $(cat jsfiles.txt); do python3 /root/tools/LinkFinder/linkfinder.py -i $i -o cli >> linkfinder_output; done;`
 
-![](./images/enum3)
+![](enum3.png)
 
 5. Let's grep for some specific strings like `/v1`, `/v2/`, and `/v3/`
 
 `grep "/v1" linkfinder_output.txt | sort -u`
 
-![](./images/enum4)
+![](enum4.png)
 
 The output shows some endpoints which I haven't seen before, especially the ones under `billing`. So, one could ask me what next?
 What we have done until here is that we have discovered a new endpoint with new parameters, so we have more attack vectors. We could start doing some analysis to check what this API aims to do and check for common injection on the existing parameters.
@@ -188,25 +188,25 @@ First, we need to make sure this endpoint is actually valid on our target. So I 
 
 6. Send the request as normal
 
-![](./images/sqlx0)
+![](sqlx0.png)
 
 Great, the endpoint is valid and excepted a value to be passed to `ids` parameter.
 
 
 7. Adding some random strings to `ids` parameter
 
-![](./images/sqlx1)
+![](sqlx1.png)
 
 8. hmmm, things become more exciting. The server response shows that it clearly takes out input and interacts with the DB. From this point, I have started testing for SQL Injection.
 SQLmap doesn't work and the WAF was setting in front of me, so I had to do it manually.
 
 9. Valid query
 
-![](./images/sql1)
+![](sql1.png)
 
 10. Invalid query
 
-![](./images/sql2)
+![](sql2.png)
 
 Using this, I was able to extract data. I submitted the report and scored a high bounty.
 
