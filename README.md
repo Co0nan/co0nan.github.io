@@ -214,7 +214,7 @@ Great, the endpoint is valid and excepted a value to be passed to `ids` paramete
 
 7. Adding some random strings to `ids` parameter
 
-![](sqlx1.png)
+![](sqx1.png)
 
 8. hmmm, things become more exciting. The server response shows that it clearly takes out input and interacts with the DB. From this point, I have started testing for SQL Injection.
 SQLmap doesn't work and the WAF was setting in front of me, so I had to do it manually.
