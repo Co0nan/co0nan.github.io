@@ -12,7 +12,7 @@ Before we dig into the blog topic we need to understand first why we even need t
 
 **The answer is simple, expanding your attack surface.**
 
-### What is the attack surface.
+### What is the attack surface?
 
 The attack surface is the number of all possible points, or attack vectors, where an unauthorized user can access a system and extract data. More attack vectors == more possible bugs.
 
@@ -101,6 +101,7 @@ Let's dig into this more...
                         - hackrawler
                         - gau
                         - photon
+
 ### Port Scanning
 
 The aim of this step is to find if there are any open ports that run other services.
@@ -166,7 +167,7 @@ The step that never ends. This is one of the most important steps that you need 
 
 I would walk you through one of the SQL injection vulnerabilities that I have recently found which I wouldn't be able to find without proper recon.
 
-Let's call the target `vuln.com`. I was hurting on this target for several years and I was focusing on the application functions themselves.
+Let's call the target `vuln.com`. I was hunting on this target for several years and I was focusing on the application functions themselves.
 The main application usually interacts with a back-end API under `/api/v3/`. When I decided to go back hunting again on this target, I told myself to start from the beginning and act as if this is my first time hunting on them. I just need to find more attack vectors.
 
 The first thing you need to plan is to set your goal/objective. My goal was to find more API endpoints related to this target.
