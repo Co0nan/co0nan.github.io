@@ -69,9 +69,11 @@ More functions == More different types of issues you will have to test.
 Let's dig into this more...
 
 ### Asset Discovery
-    - ASN Enum
-        - You need to discover more assets/subnets belonging to the target company.
-            - Tools
+
+- ASN Enum
+
+    - You need to discover more assets/subnets belonging to the target company.
+        - Tools
                 1. Amass
                 2. [https://bgp.he.net/](https://bgp.he.net/)
     - Subdomain Discovery
@@ -100,49 +102,64 @@ Let's dig into this more...
                         - gau
                         - photon
 ### Port Scanning
-    - The aim of this step is to find if there are any open ports that run other services.
-        - What type of service running on the opened port?
+
+The aim of this step is to find if there are any open ports that run other services.
+
+- What type of service running on the opened port?
+   
         - If it’s a Webserver, repeat the steps above.
         - Another service? google it for common misconfiguration.
-    - What type of issues can you find during port scanning?
+        
+- What type of issues can you find during port scanning?
+
         - Exposed Instances
         - Running Webserver without authentication.
         - Running service with an outdated version
 
 ### Vulnerability Scanning
-    - The aim of this step is to find common vulnerabilities using tools like Nuclei.
-    - What type of issues can you find during vulnerability scanning?
-        - CVEs
-        - Common Misconfiguration
-        - Webserver vulnerabilities
-        - Low hanging fruits and more
+
+- The aim of this step is to find common vulnerabilities using tools like Nuclei.
+
+- What type of issues can you find during vulnerability scanning?
+
+    - CVEs
+    - Common Misconfiguration
+    - Webserver vulnerabilities
+    - Low hanging fruits and more
        
 ### Content Discovery
    
     The step that never ends. This is one of the most important steps that you need to do and continue doing it while you explore the application. Discovering more URLs, and endpoints should be always a side-process in your recon flow. Don’t do it one time.
    
-    - What we can do during/after content discovery?
-      - Directory Fuzzing
-          - Fuzz the subdomain using fuzzing tools like `FFUF`, and `Rustbuster` to find hidden directories which may reveal admin portals or files that may contain sensitive information.
-          - Keep note of any file or directory you find even if it returns a 403,401 errors. We can re-use it on another subdomain and we get another result.
-      - WaybackURLs
-          - Check for the URLs from Wayback machine and split the URLs ⇒ extract the endpoint and generate a list of those URLs
-          - Try to check those URLs if they have `/api/` endpoints and try to play with this API.
-          - Re-use those endpoints with all the subdomains you have discovered.
-              - If you found `[https://target.com/path/to/something](https://target.com/path/to/something)` , use `path/to/something` with another subdomain may be an endpoint deleted from a subdomain was still exist on another.
-          - Check URLs that contain parameters and use a tool like `hakrawler` to get the status code of each URL, or use a tool to take a screenshot for each URL
-              - If the URL is alive, try to identify what the parameters have to do with the URL:
-                  - Does it affect the request?
-                  - What is used for? does it reflect back or have something to do with the back-end database. From here you have to test for common user-input vulnerabilities
-          - Javascript Endpoint Discovery
-              - Use a tool like `subjs` to extract all JS files from a list of subdomain
-              - Loop through the output using a tool like `LinkFinder` to extract all endpoints from those files ⇒ and add them to the list we have generated above.
-          - Parameter Discovery
-              - Use tools like `Arjun`, or `ParamSpider` to find the hidden parameter for any interesting URL you have discovered.
-    - What type of issues can you find during content enumeration?
-        - Information Disclosure through debug files
-        - Information Disclosure through exposed/sensitive files
-        - Leaked documents like PDF files that contain sensitive information
+- What we can do during/after content discovery?
+    
+    - Directory Fuzzing
+        - Fuzz the subdomain using fuzzing tools like `FFUF`, and `Rustbuster` to find hidden directories which may reveal admin portals or files that may contain sensitive information.
+          
+        - Keep note of any file or directory you find even if it returns a 403,401 errors. We can re-use it on another subdomain and we get another result.
+          
+    - WaybackURLs
+        - Check for the URLs from Wayback machine and split the URLs ⇒ extract the endpoint and generate a list of those URLs
+        - Try to check those URLs if they have `/api/` endpoints and try to play with this API.
+        - Re-use those endpoints with all the subdomains you have discovered.
+        - If you found `[https://target.com/path/to/something](https://target.com/path/to/something)` , use `path/to/something` with another subdomain may be an endpoint deleted from a subdomain was still exist on another.
+        - Check URLs that contain parameters and use a tool like `hakrawler` to get the status code of each URL, or use a tool to take a screenshot for each URL
+        - If the URL is alive, try to identify what the parameters have to do with the URL:
+            - Does it affect the request?
+            - What is used for? does it reflect back or have something to do with the back-end database. From here you have to test for common user-input vulnerabilities
+     
+     - Javascript Endpoint Discovery
+         - Use a tool like `subjs` to extract all JS files from a list of subdomain
+         - Loop through the output using a tool like `LinkFinder` to extract all endpoints from those files ⇒ and add them to the list we have generated above.
+     
+     - Parameter Discovery
+        - Use tools like `Arjun`, or `ParamSpider` to find the hidden parameter for any interesting URL you have discovered.
+
+- What type of issues can you find during content enumeration?
+
+    - Information Disclosure through debug files
+    - Information Disclosure through exposed/sensitive files
+    - Leaked documents like PDF files that contain sensitive information
 
 
 ### Putting it all together
