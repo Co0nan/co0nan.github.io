@@ -56,7 +56,7 @@ You need to do recon to find attack vectors for different types of vulnerabiliti
 **Example 1**: if you learned about XSS, SQL, and SSRF you should know that all of them relaying on user-supplied data. So it makes sense if you couldn't find those types of issues on a static website.
 But you need to explore the target for more endpoints, and parameters to start testing for those types of issues.
 
-**Example 2**: A web application that doesn't have any authenticated requests, it's designed to take some user input but from the un-authenticated point. Here, you can test for input-validation issues like above, but it doesn't make sense to try to test for IDORs for example, right?
+**Example 2**: A web application that doesn't have any authenticated requests, it's designed to take some user input but from the un-authenticated point. Here, you can test for input-validation issues like above, but it doesn't make sense to try to test for IDORs for example because the root cause of IDOR is the authorixation mechanism which is not exist in our application.
 
 With that said, you must understand that the aim of recon is to find an entry point for a vulnerability.
 
@@ -74,16 +74,16 @@ Let's dig into this more...
 
     - You need to discover more assets/subnets belonging to the target company.
         - Tools
-                1. Amass
-                2. [https://bgp.he.net/](https://bgp.he.net/)
-    - Subdomain Discovery
-        - The aim of this step is to enumerate further domains in order to expand your attack surface
-            - Tools:
-                1. Amass
-                2. Assetfinder
-                3. findomain
-                4. Sublist3r
-                5. and more..
+            - Amass
+            - [https://bgp.he.net/](https://bgp.he.net/)
+- Subdomain Discovery
+    - The aim of this step is to enumerate further domains in order to expand your attack surface
+        - Tools:
+            - Amass
+            - Assetfinder
+            - findomain
+            - Sublist3r
+            - and more..
         - What type of issues can you find during subdomain enumeration?
             - Subdomain takeover
             - Subdomains that are mistakenly exposed to the public and contain internal admin panels
@@ -106,15 +106,15 @@ Let's dig into this more...
 The aim of this step is to find if there are any open ports that run other services.
 
 - What type of service running on the opened port?
-   
-        - If it’s a Webserver, repeat the steps above.
-        - Another service? google it for common misconfiguration.
+
+    - If it’s a Webserver, repeat the steps above.
+    - Another service? google it for common misconfiguration.
         
 - What type of issues can you find during port scanning?
 
-        - Exposed Instances
-        - Running Webserver without authentication.
-        - Running service with an outdated version
+    - Exposed Instances
+    - Running Webserver without authentication.
+    - Running service with an outdated version
 
 ### Vulnerability Scanning
 
@@ -128,8 +128,8 @@ The aim of this step is to find if there are any open ports that run other servi
     - Low hanging fruits and more
        
 ### Content Discovery
-   
-    The step that never ends. This is one of the most important steps that you need to do and continue doing it while you explore the application. Discovering more URLs, and endpoints should be always a side-process in your recon flow. Don’t do it one time.
+
+The step that never ends. This is one of the most important steps that you need to do and continue doing it while you explore the application. Discovering more URLs, and endpoints should be always a side-process in your recon flow. Don’t do it one time.
    
 - What we can do during/after content discovery?
     
