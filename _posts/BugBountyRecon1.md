@@ -56,7 +56,7 @@ You need to do recon to find attack vectors for different types of vulnerabiliti
 **Example 1**: if you learned about XSS, SQL, and SSRF you should know that all of them relaying on user-supplied data. So it makes sense if you couldn't find those types of issues on a static website.
 But you need to explore the target for more endpoints, and parameters to start testing for those types of issues.
 
-**Example 2**: A web application that doesn't have any authenticated requests, it's designed to take some user input but from the un-authenticated point. Here, you can test for input-validation issues like above, but it doesn't make sense to try to test for IDORs for example because the root cause of IDOR is the authorixation mechanism which is not exist in our application.
+**Example 2**: A web application that doesn't have any authenticated requests, it's designed to take some user input but from the un-authenticated point. Here, you can test for input-validation issues like above, but it doesn't make sense to try to test for IDORs for example because the root cause of IDOR is the authorization mechanism which is not exist in our application.
 
 With that said, you must understand that the aim of recon is to find an entry point for a vulnerability.
 
@@ -178,7 +178,7 @@ I have played with most of the APIs under `/api/v3` before and tested them, I ne
 
 `assetfinder -subs-only vuln.com > all.txt`
 
-![](enum.png)
+![](../images/bugbounty-recon-1/enum.png)
 
 2. Filter alive targets
 
@@ -188,19 +188,19 @@ I have played with most of the APIs under `/api/v3` before and tested them, I ne
 
 `cat live.txt | subjs > jsfiles.txt`
 
-![](enum2.png)
+![](../images/bugbounty-recon-1/enum2.png)
 
 4. Extract all endpoints from those files using `LinkFinder` with one-liner.
 
 `for i in $(cat jsfiles.txt); do python3 /root/tools/LinkFinder/linkfinder.py -i $i -o cli >> linkfinder_output; done;`
 
-![](enum3.png)
+![](../images/bugbounty-recon-1/enum3.png)
 
 5. Let's grep for some specific strings like `/v1`, `/v2/`, and `/v3/`
 
 `grep "/v1" linkfinder_output.txt | sort -u`
 
-![](enum4.png)
+![](../images/bugbounty-recon-1/enum4.png)
 
 The output shows some endpoints which I haven't seen before, especially the ones under `billing`. So, one could ask me what next?
 What we have done until here is that we have discovered a new endpoint with new parameters, so we have more attack vectors. We could start doing some analysis to check what this API aims to do and check for common injection on the existing parameters.
@@ -208,25 +208,25 @@ First, we need to make sure this endpoint is actually valid on our target. So I 
 
 6. Send the request as normal
 
-![](sqlx0.png)
+![](../images/bugbounty-recon-1/sqlx0.png)
 
 Great, the endpoint is valid and excepted a value to be passed to `ids` parameter.
 
 
 7. Adding some random strings to `ids` parameter
 
-![](sqx1.png)
+![](../images/bugbounty-recon-1/sqx1.png)
 
 8. hmmm, things become more exciting. The server response shows that it clearly takes out input and interacts with the DB. From this point, I have started testing for SQL Injection.
 SQLmap doesn't work and the WAF was setting in front of me, so I had to do it manually.
 
 9. Valid query
 
-![](sql1.png)
+![](../images/bugbounty-recon-1/sql1.png)
 
 10. Invalid query
 
-![](sql2.png)
+![](../images/bugbounty-recon-1/sql2.png)
 
 Using this, I was able to extract data. I submitted the report and scored a high bounty.
 
