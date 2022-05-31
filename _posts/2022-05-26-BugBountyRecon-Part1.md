@@ -1,21 +1,21 @@
 ---
-title: Bug Bounty Reconnaissance from another perspective
 layout: post
+title: Bug Bounty Reconnaissance from another perspective
 ---
 
-### Introduction
+## Quick Introduction
 
 Most of the new bug hunters face many problems while doing recon or even after recon. They simply don’t know how to use this data, what they are supposed to do after that?
 
 In this blog, I have tried to focus on what you can achieve/do after the recon and what to look for after each step. This blog doesn’t explain how to do recon but rather how to take advantage of the data you have.
 
-### Why do we need to recon?
+## Why do we need to recon?
 
 Before we dig into the blog topic we need to understand first why we even need to do recon? We know about common vulnerabilities like SQL, XSS, SSRF, and so on. So, why do I need to recon a target?
 
 **The answer is simple, expanding your attack surface.**
 
-### What is the attack surface?
+## What is the attack surface?
 
 The attack surface is the number of all possible points, or attack vectors, where an unauthorized user can access a system and extract data. More attack vectors == more possible bugs.
 
@@ -23,7 +23,7 @@ Let's take an example as a building you're trying to break into. At first, you d
 
 The reason you ask all these questions is that you simply need to find more ways to enter the building and check if you can link an entry with other to achieve what you need.
 
-### Let’s apply this to our objective.
+## Let’s apply this to our objective.
 
 During the recon process, your aim is to find more assets belonging to the target company in order to expand your attack vectors.
 
@@ -51,7 +51,7 @@ One more time, the owner added a new subdomain under `app.target.com`. Again, th
 
 Let’s jump to the recon process and see what you can achieve in each step.
 
-### Recon Process
+## Recon Process
 
 Don’t overload yourself with recon. It’s simple.
 You need to do recon to find attack vectors for different types of vulnerabilities that you have previously learned.
@@ -71,7 +71,7 @@ More functions == More different types of issues you will have to test.
 
 Let's dig into this more...
 
-### Asset Discovery
+## Asset Discovery
 
 - ASN Enum
 
@@ -105,7 +105,7 @@ Let's dig into this more...
                         - gau
                         - photon
 
-### Port Scanning
+## Port Scanning
 
 The aim of this step is to find if there are any open ports that run other services.
 
@@ -120,7 +120,7 @@ The aim of this step is to find if there are any open ports that run other servi
     - Running Webserver without authentication.
     - Running service with an outdated version
 
-### Vulnerability Scanning
+## Vulnerability Scanning
 
 - The aim of this step is to find common vulnerabilities using tools like Nuclei.
 
@@ -131,7 +131,7 @@ The aim of this step is to find if there are any open ports that run other servi
     - Webserver vulnerabilities
     - Low hanging fruits and more
        
-### Content Discovery
+## Content Discovery
 
 The step that never ends. This is one of the most important steps that you need to do and continue doing it while you explore the application. Discovering more URLs, and endpoints should be always a side-process in your recon flow. Don’t do it one time.
    
@@ -166,7 +166,7 @@ The step that never ends. This is one of the most important steps that you need 
     - Leaked documents like PDF files that contain sensitive information
 
 
-### Putting it all together
+## Putting it all together
 
 I would walk you through one of the SQL injection vulnerabilities that I have recently found which I wouldn't be able to find without proper recon.
 
@@ -234,7 +234,7 @@ SQLmap doesn't work and the WAF was setting in front of me, so I had to do it ma
 Using this, I was able to extract data. I submitted the report and scored a high bounty.
 
 
-### Conclusion
+## Conclusion
 
 The problem with new bug hunter is that they usually use a lot of tools at a time and doesn't know deeply what this tool should give them, or what they need to achieve by using it.
 I would recommend being patient and using the tools only when you feel that you need them to achieve something, with that you will be able to use the output for the next step.
