@@ -1,4 +1,7 @@
-# Bug Bounty Reconnaissance from another perspective
+---
+title: Bug Bounty Reconnaissance from another perspective
+layout: post
+---
 
 ### Introduction
 
