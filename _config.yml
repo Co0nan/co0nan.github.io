@@ -1,0 +1,44 @@
+theme: jekyll-theme-hacker
+
+name: Co0nan blog
+description: Offensive Security Consultant
+avatar: ../images/logo.jpeg
+footer-links:
+  dribbble:
+  email:
+  facebook:
+  flickr:
+  github: Co0nan
+  instagram:
+  linkedin: tarek-mohammed99
+  pinterest:
+  rss: 
+  twitter: Conan0x3
+  stackoverflow: 
+  youtube: 
+  googleplus:
+
+
+disqus:
+url:
+baseurl: ""
+permalink: /:title/
+version: v1.1.0
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+sass:
+  style: :expanded # You might prefer to minify using :compressed
+gems:
+  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
+  - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
+  - jekyll-admin
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - CNAME
